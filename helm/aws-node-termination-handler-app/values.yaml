@@ -44,9 +44,13 @@ securityContext:
 terminationGracePeriodSeconds:
 
 resources:
-  cpu:
-    limit: 0.1
-    request: 0.1
+  requests:
+    cpu: 0.1
+    memory: 100Mi
+  limit:
+    cpu: 0.1
+    memory: 100Mi
+
   memory:
     limit: 100Mi
     request: 100Mi
