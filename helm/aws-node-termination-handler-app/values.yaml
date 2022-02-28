@@ -46,7 +46,7 @@ terminationGracePeriodSeconds:
 resources:
   cpu:
     limit: 0.1
-    limit: 0.1
+    request: 0.1
   memory:
     limit: 100Mi
     request: 100Mi
