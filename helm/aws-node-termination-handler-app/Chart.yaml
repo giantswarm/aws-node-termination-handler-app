@@ -1,0 +1,13 @@
+apiVersion: v1
+appVersion: 1.15.0
+description: Deploy components for the aws-node-termination-handler app
+name: aws-node-termination-handler-app
+version: [[ .Version ]]
+home: https://github.com/giantswarm/aws-node-termination-handler-app
+sources:
+  - https://raw.githubusercontent.com/giantswarm/aws-node-termination-handler-app/v[[ .Version ]]/README.md
+restrictions:
+  compatibleProviders: ["aws"]
+annotations:
+  application.giantswarm.io/team: "phoenix"
+  config.giantswarm.io/version: 1.x.x
