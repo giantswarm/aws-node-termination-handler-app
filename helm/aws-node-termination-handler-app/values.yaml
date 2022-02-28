@@ -43,11 +43,27 @@ securityContext:
 
 terminationGracePeriodSeconds:
 
-resources: {}
-
+resources:
+  cpu:
+    limit: 0.1
+    limit: 0.1
+  memory:
+    limit: 100Mi
+    request: 100Mi
 nodeSelector: {}
 
-affinity: {}
+affinity:
+  podAntiAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+    - podAffinityTerm:
+        labelSelector:
+          matchExpressions:
+          - key: k8s-app
+            operator: In
+            values:
+            - aws-node-termination-handler
+        topologyKey: kubernetes.io/hostname
+      weight: 1
 
 tolerations: []
 
