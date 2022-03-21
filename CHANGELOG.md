@@ -7,6 +7,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+## [0.2.0] - 2022-03-21
+
 ### Added
 
 - Add VerticalPodAutoscaler CR.
@@ -17,5 +19,6 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 - First version.
 
-[Unreleased]: https://github.com/giantswarm/aws-node-termination-handler-app/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/giantswarm/aws-node-termination-handler-app/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/giantswarm/aws-node-termination-handler-app/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/giantswarm/aws-node-termination-handler-app/compare/v0.0.0...v0.1.0
