@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Changed
+
+- Allow customizing the container image registry domain.
+
 ## [0.2.0] - 2022-03-21
 
 ### Added

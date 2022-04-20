@@ -3,7 +3,8 @@
 # Declare variables to be passed into your templates.
 
 image:
-  repository: quay.io/giantswarm/aws-node-termination-handler
+  registry: quay.io
+  name: giantswarm/aws-node-termination-handler
   tag: "v1.15.0"
   pullPolicy: IfNotPresent
   pullSecrets: []
