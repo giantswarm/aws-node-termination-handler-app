@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Changed
+
+- Push to `giantswarm` catalog instead of `control-plane` one.
+
 ## [0.3.0] - 2022-04-20
 
 ### Changed
