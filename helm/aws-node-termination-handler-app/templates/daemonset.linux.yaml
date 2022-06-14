@@ -29,10 +29,6 @@ spec:
         {{- toYaml (mergeOverwrite (dict) .Values.podAnnotations .Values.linuxPodAnnotations) | nindent 8 }}
       {{- end }}
     spec:
-      {{- with .Values.image.pullSecrets }}
-      imagePullSecrets:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
       serviceAccountName: {{ include "aws-node-termination-handler.serviceAccountName" . }}
       {{- with .Values.podSecurityContext }}
       securityContext:
