@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Changed
+
+- Remove `imagePullSecrets`
+
 ## [0.3.1] - 2022-04-20
 
 ### Changed

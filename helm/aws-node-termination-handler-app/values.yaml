@@ -7,7 +7,6 @@ image:
   name: giantswarm/aws-node-termination-handler
   tag: "v1.15.0"
   pullPolicy: IfNotPresent
-  pullSecrets: []
 
 nameOverride: ""
 fullnameOverride: ""
