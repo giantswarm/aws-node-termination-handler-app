@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Changed
+
+- Bump to upstream version 1.17.2 and related chart template.
+
 ## [1.16.5-gs1] - 2022-07-01
 
 ### Changed
