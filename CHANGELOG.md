@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Changed
+
+ - Defined the use of the RuntimeDefault Seccompprofiles in the pod and container security context.
+
 ## [1.17.2-gs1] - 2022-09-14
 
 ### Changed
