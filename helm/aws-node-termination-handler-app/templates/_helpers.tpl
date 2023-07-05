@@ -48,13 +48,29 @@ Common labels
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
-app.kubernetes.io/component: {{ .Release.Name }}
 app.kubernetes.io/part-of: {{ .Release.Name }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
+application.giantswarm.io/team: {{ index .Chart.Annotations "application.giantswarm.io/team" | quote }}
 helm.sh/chart: {{ include "aws-node-termination-handler.chart" . }}
 {{- with .Values.customLabels }}
 {{ toYaml . }}
 {{- end }}
+{{- end -}}
+
+{{/*
+Deployment labels
+*/}}
+{{- define "aws-node-termination-handler.labelsDeployment" -}}
+{{ include "aws-node-termination-handler.labels" . }}
+app.kubernetes.io/component: deployment
+{{- end -}}
+
+{{/*
+Daemonset labels
+*/}}
+{{- define "aws-node-termination-handler.labelsDaemonset" -}}
+{{ include "aws-node-termination-handler.labels" . }}
+app.kubernetes.io/component: daemonset
 {{- end -}}
 
 {{/*
