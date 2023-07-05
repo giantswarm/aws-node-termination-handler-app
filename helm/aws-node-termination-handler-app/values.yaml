@@ -89,7 +89,7 @@ logLevel: info
 # Log messages in JSON format
 jsonLogging: false
 
-enablePrometheusServer: false
+enablePrometheusServer: true
 prometheusServerPort: 9092
 
 # dryRun tells node-termination-handler to only log calls to kubernetes control plane
@@ -168,14 +168,14 @@ serviceMonitor:
   # Specifies whether ServiceMonitor should be created
   # this needs enableSqsTerminationDraining: true
   # and enablePrometheusServer: true
-  create: false
+  create: true
   # Specifies whether the ServiceMonitor should be created in a different namespace than
   # the Helm release
   namespace:
   # Additional labels to add to the metadata
   labels: {}
   # The Prometheus scrape interval
-  interval: 30s
+  interval: 60s
   # The number of scraped samples that will be accepted
   sampleLimit: 5000
 

@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Added
+
+- Add Service Monitor.
+
 ### Changed
 
  - Defined the use of the RuntimeDefault Seccompprofiles in the pod and container security context.
