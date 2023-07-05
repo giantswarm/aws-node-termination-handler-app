@@ -7,6 +7,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+## [1.17.2-gs2] - 2023-07-05
+
 ### Added
 
 - Add Service Monitor.
@@ -57,7 +59,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 - First version.
 
-[Unreleased]: https://github.com/giantswarm/aws-node-termination-handler-app/compare/v1.17.2-gs1...HEAD
+[Unreleased]: https://github.com/giantswarm/aws-node-termination-handler-app/compare/v1.17.2-gs2...HEAD
+[1.17.2-gs2]: https://github.com/giantswarm/aws-node-termination-handler-app/compare/v1.17.2-gs1...v1.17.2-gs2
 [1.17.2-gs1]: https://github.com/giantswarm/aws-node-termination-handler-app/compare/v1.16.5-gs1...v1.17.2-gs1
 [1.16.5-gs1]: https://github.com/giantswarm/aws-node-termination-handler-app/compare/v0.4.0...v1.16.5-gs1
 [0.4.0]: https://github.com/giantswarm/aws-node-termination-handler-app/compare/v0.3.1...v0.4.0
