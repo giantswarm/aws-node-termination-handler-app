@@ -400,6 +400,18 @@
                             "type": "string"
                         }
                     }
+                },
+                "capabilities":{
+                    "type": "object",
+                    "properties": {
+                        "drop": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            },
+                            "default": ["ALL"]
+                        }
+                    }
                 }
             }
         },
