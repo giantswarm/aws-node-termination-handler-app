@@ -307,6 +307,6 @@ instanceMetadataURL: ""
 procUptimeFile: /proc/uptime
 
 global:
-  rodSecurityStandards:
+  podSecurityStandards:
     enforced: false
 
