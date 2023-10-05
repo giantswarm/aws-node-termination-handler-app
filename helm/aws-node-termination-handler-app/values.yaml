@@ -305,3 +305,8 @@ instanceMetadataURL: ""
 
 # (TESTING USE): Mount path for uptime file
 procUptimeFile: /proc/uptime
+
+global:
+  rodSecurityStandards:
+    enforced: false
+
