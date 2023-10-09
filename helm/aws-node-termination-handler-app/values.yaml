@@ -309,4 +309,3 @@ procUptimeFile: /proc/uptime
 global:
   podSecurityStandards:
     enforced: false
-
