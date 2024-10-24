@@ -1,0 +1,13 @@
+apiVersion: vendir.k14s.io/v1alpha1
+directories:
+- contents:
+  - git:
+      commitTitle: Update helper
+      sha: 2f959b6782ed52f4b342bf500a24801ef8ad9104
+    path: aws-node-termination-handler
+  path: vendor
+- contents:
+  - directory: {}
+    path: .
+  path: helm/aws-node-termination-handler/templates
+kind: LockConfig

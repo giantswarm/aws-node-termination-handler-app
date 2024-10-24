@@ -1,44 +1,51 @@
-{{- if .Values.enableSqsTerminationDraining }}
+{{- if and (not .Values.enableSqsTerminationDraining) (lower .Values.targetNodeOs | contains "linux") -}}
 apiVersion: apps/v1
-kind: Deployment
+kind: DaemonSet
 metadata:
   name: {{ include "aws-node-termination-handler.fullname" . }}
   namespace: {{ .Release.Namespace }}
   labels:
-    {{- include "aws-node-termination-handler.labels" . | nindent 4 }}
+    {{- include "aws-node-termination-handler.labelsDaemonset" . | nindent 4 }}
 spec:
-  replicas: {{ .Values.replicas }}
-  {{- with .Values.strategy }}
-  strategy:
+  {{- with .Values.updateStrategy }}
+  updateStrategy:
     {{- toYaml . | nindent 4 }}
   {{- end }}
   selector:
     matchLabels:
-      {{- include "aws-node-termination-handler.selectorLabelsDeployment" . | nindent 6 }}
+      {{- include "aws-node-termination-handler.selectorLabelsDaemonset" . | nindent 6 }}
+      kubernetes.io/os: linux
   template:
     metadata:
       labels:
-        {{- include "aws-node-termination-handler.selectorLabelsDeployment" . | nindent 8 }}
+        {{- include "aws-node-termination-handler.selectorLabelsDaemonset" . | nindent 8 }}
+        kubernetes.io/os: linux
         k8s-app: aws-node-termination-handler
-      {{- with .Values.podLabels }}
+      {{- with (mergeOverwrite (dict) .Values.podLabels .Values.linuxPodLabels) }}
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.podAnnotations }}
+      {{- if or .Values.podAnnotations .Values.linuxPodAnnotations }}
       annotations:
-        {{- toYaml . | nindent 8 }}
+        {{- toYaml (mergeOverwrite (dict) .Values.podAnnotations .Values.linuxPodAnnotations) | nindent 8 }}
       {{- end }}
     spec:
+      {{- with .Values.image.pullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       serviceAccountName: {{ include "aws-node-termination-handler.serviceAccountName" . }}
       {{- with .Values.podSecurityContext }}
       securityContext:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.priorityClassName }}
+      {{- with .Values.daemonsetPriorityClassName }}
       priorityClassName: {{ . }}
       {{- end }}
       {{- with .Values.terminationGracePeriodSeconds }}
       terminationGracePeriodSeconds: {{ . }}
       {{- end }}
+      hostNetwork: {{ .Values.useHostNetwork }}
+      dnsPolicy: {{ default .Values.linuxDnsPolicy .Values.dnsPolicy }}
       {{- with .Values.dnsConfig }}
       dnsConfig:
         {{- toYaml . | nindent 8 }}
@@ -65,7 +72,7 @@ spec:
                 fieldRef:
                   fieldPath: metadata.namespace
             - name: ENABLE_PROBES_SERVER
-              value: "true"
+              value: {{ .Values.enableProbesServer | quote }}
             - name: PROBES_SERVER_PORT
               value: {{ .Values.probes.httpGet.port | quote }}
             - name: PROBES_SERVER_ENDPOINT
@@ -74,16 +81,18 @@ spec:
               value: {{ .Values.logLevel | quote }}
             - name: JSON_LOGGING
               value: {{ .Values.jsonLogging | quote }}
+            - name: LOG_FORMAT_VERSION
+              value: {{ .Values.logFormatVersion | quote }}
             - name: ENABLE_PROMETHEUS_SERVER
               value: {{ .Values.enablePrometheusServer | quote }}
             - name: PROMETHEUS_SERVER_PORT
               value: {{ .Values.prometheusServerPort | quote }}
-            - name: CHECK_TAG_BEFORE_DRAINING
-              value: {{ .Values.checkTagBeforeDraining | quote }}
-            - name: MANAGED_TAG
-              value: {{ .Values.managedTag | quote }}
-            - name: USE_PROVIDER_ID
-              value: {{ .Values.useProviderId | quote }}
+            {{- with .Values.instanceMetadataURL }}
+            - name: INSTANCE_METADATA_URL
+              value: {{ . | quote }}
+            {{- end }}
+            - name: METADATA_TRIES
+              value: {{ .Values.metadataTries | quote }}
             - name: DRY_RUN
               value: {{ .Values.dryRun | quote }}
             - name: CORDON_ONLY
@@ -102,8 +111,6 @@ spec:
               value: {{ .Values.nodeTerminationGracePeriod | quote }}
             - name: EMIT_KUBERNETES_EVENTS
               value: {{ .Values.emitKubernetesEvents | quote }}
-            - name: COMPLETE_LIFECYCLE_ACTION_DELAY_SECONDS
-              value: {{ .Values.completeLifecycleActionDelaySeconds | quote }}
             {{- with .Values.kubernetesEventsExtraAnnotations }}
             - name: KUBERNETES_EVENTS_EXTRA_ANNOTATIONS
               value: {{ . | quote }}
@@ -136,6 +143,8 @@ spec:
             {{- end }}
             - name: ENABLE_SPOT_INTERRUPTION_DRAINING
               value: {{ .Values.enableSpotInterruptionDraining | quote }}
+            - name: ENABLE_ASG_LIFECYCLE_DRAINING
+              value: {{ .Values.enableASGLifecycleDraining | quote }}
             - name: ENABLE_SCHEDULED_EVENT_DRAINING
               value: {{ .Values.enableScheduledEventDraining | quote }}
             - name: ENABLE_REBALANCE_MONITORING
@@ -143,65 +152,61 @@ spec:
             - name: ENABLE_REBALANCE_DRAINING
               value: {{ .Values.enableRebalanceDraining | quote }}
             - name: ENABLE_SQS_TERMINATION_DRAINING
-              value: "true"
-            {{- with .Values.awsRegion }}
-            - name: AWS_REGION
-              value: {{ . | quote }}
-            {{- end }}
-            {{- with .Values.awsEndpoint }}
-            - name: AWS_ENDPOINT
-              value: {{ . | quote }}
-            {{- end }}
-            {{- if and .Values.awsAccessKeyID .Values.awsSecretAccessKey }}
-            - name: AWS_ACCESS_KEY_ID
-              value: {{ .Values.awsAccessKeyID | quote }}
-            - name: AWS_SECRET_ACCESS_KEY
-              value: {{ .Values.awsSecretAccessKey | quote }}
-            {{- end }}
-            - name: QUEUE_URL
-              value: {{ .Values.queueURL | quote }}
-            - name: WORKERS
-              value: {{ .Values.workers | quote }}
+              value: "false"
+            - name: UPTIME_FROM_FILE
+              value: {{ .Values.procUptimeFile | quote }}
             {{- with .Values.extraEnv }}
               {{- toYaml . | nindent 12 }}
             {{- end }}
+          {{- if or .Values.enablePrometheusServer .Values.enableProbesServer }}
           ports:
+          {{- if .Values.enableProbesServer }}
            - name: liveness-probe
              protocol: TCP
              containerPort: {{ .Values.probes.httpGet.port }}
+          {{- end }}
           {{- if .Values.enablePrometheusServer }}
            - name: http-metrics
              protocol: TCP
              containerPort: {{ .Values.prometheusServerPort }}
           {{- end }}
+          {{- end }}
+          {{- if .Values.enableProbesServer }}
           livenessProbe:
             {{- toYaml .Values.probes | nindent 12 }}
+          {{- end }}
           {{- with .Values.resources }}
           resources:
             {{- toYaml . | nindent 12 }}
           {{- end }}
-          {{- if and .Values.webhookTemplateConfigMapName .Values.webhookTemplateConfigMapKey }}
           volumeMounts:
+            - name: uptime
+              mountPath: {{ .Values.procUptimeFile }}
+              readOnly: true
+          {{- if and .Values.webhookTemplateConfigMapName .Values.webhookTemplateConfigMapKey }}
             - name: webhook-template
               mountPath: /config/
           {{- end }}
-      {{- if and .Values.webhookTemplateConfigMapName .Values.webhookTemplateConfigMapKey }}
       volumes:
+        - name: uptime
+          hostPath:
+            path: {{ .Values.procUptimeFile | default "/proc/uptime" }}
+        {{- if and .Values.webhookTemplateConfigMapName .Values.webhookTemplateConfigMapKey }}
         - name: webhook-template
           configMap:
             name: {{ .Values.webhookTemplateConfigMapName }}
-      {{- end }}
+        {{- end }}
       nodeSelector:
         kubernetes.io/os: linux
-      {{- with .Values.nodeSelector }}
+      {{- with default .Values.daemonsetNodeSelector (default .Values.nodeSelector .Values.linuxNodeSelector) }}
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.affinity }}
+      {{- if or .Values.daemonsetAffinity (or .Values.affinity .Values.linuxAffinity) }}
       affinity:
-        {{- toYaml . | nindent 8 }}
+        {{- toYaml (default .Values.daemonsetAffinity (default .Values.affinity .Values.linuxAffinity)) | nindent 8 }}
       {{- end }}
-      {{- with .Values.tolerations }}
+      {{- if or .Values.daemonsetTolerations (or .Values.tolerations .Values.linuxTolerations) }}
       tolerations:
-        {{- toYaml . | nindent 8 }}
+        {{- toYaml (default .Values.daemonsetTolerations (default .Values.tolerations .Values.linuxTolerations )) | nindent 8 }}
       {{- end }}
-{{- end }}
+{{- end -}}
