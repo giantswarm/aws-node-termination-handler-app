@@ -5,7 +5,7 @@
 image:
   registry: quay.io
   name: giantswarm/aws-node-termination-handler
-  tag: "v1.17.2"
+  tag: "v1.22.0"
   pullPolicy: IfNotPresent
   pullSecrets: []
 
