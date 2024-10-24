@@ -10,7 +10,7 @@ workflows:
           name: push-to-giantswarm-app-catalog
           app_catalog: "giantswarm-catalog"
           app_catalog_test: "giantswarm-test-catalog"
-          chart: "aws-node-termination-handler-app"
+          chart: "aws-node-termination-handler"
           filters:
             # Trigger the job also on git tag.
             tags:
