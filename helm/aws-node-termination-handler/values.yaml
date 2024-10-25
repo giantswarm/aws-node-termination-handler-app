@@ -196,13 +196,13 @@ priorityClassName: system-cluster-critical
 awsRegion: ""
 
 # Listens for messages on the specified SQS queue URL
-queueURL: ""
+queueURL: "https://sqs.eu-west-2.amazonaws.com/242036376510/i5jv8-nth"
 
 # The maximum amount of parallel event processors to handle concurrent events
 workers: 10
 
 # If true, check that the instance is tagged with "aws-node-termination-handler/managed" as the key before draining the node
-checkTagBeforeDraining: true
+checkTagBeforeDraining: false
 
 # The tag to ensure is on a node if checkTagBeforeDraining is true
 managedTag: "aws-node-termination-handler/managed"
