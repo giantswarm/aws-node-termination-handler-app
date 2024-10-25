@@ -68,9 +68,6 @@
         "awsSecretAccessKey": {
             "type": "null"
         },
-        "checkASGTagBeforeDraining": {
-            "type": "boolean"
-        },
         "checkTagBeforeDraining": {
             "type": "boolean"
         },
@@ -261,9 +258,6 @@
             "type": "integer"
         },
         "logLevel": {
-            "type": "string"
-        },
-        "managedAsgTag": {
             "type": "string"
         },
         "managedTag": {
