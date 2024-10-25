@@ -1,8 +1,8 @@
-{{- if and (not .Values.enableSqsTerminationDraining) (lower .Values.targetNodeOs | contains "linux") -}}
+{{- if and (not .Values.enableSqsTerminationDraining) (lower .Values.targetNodeOs | contains "windows") -}}
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: {{ include "aws-node-termination-handler.fullname" . }}
+  name: {{ include "aws-node-termination-handler.fullnameWindows" . }}
   namespace: {{ .Release.Namespace }}
   labels:
     {{- include "aws-node-termination-handler.labelsDaemonset" . | nindent 4 }}
@@ -14,21 +14,25 @@ spec:
   selector:
     matchLabels:
       {{- include "aws-node-termination-handler.selectorLabelsDaemonset" . | nindent 6 }}
-      kubernetes.io/os: linux
+      kubernetes.io/os: windows
   template:
     metadata:
       labels:
         {{- include "aws-node-termination-handler.selectorLabelsDaemonset" . | nindent 8 }}
-        kubernetes.io/os: linux
+        kubernetes.io/os: windows
         k8s-app: aws-node-termination-handler
-      {{- with (mergeOverwrite (dict) .Values.podLabels .Values.linuxPodLabels) }}
+      {{- with (mergeOverwrite (dict) .Values.podLabels .Values.windowsPodLabels) }}
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- if or .Values.podAnnotations .Values.linuxPodAnnotations }}
+      {{- if or .Values.podAnnotations .Values.windowsPodAnnotations }}
       annotations:
-        {{- toYaml (mergeOverwrite (dict) .Values.podAnnotations .Values.linuxPodAnnotations) | nindent 8 }}
+        {{- toYaml (mergeOverwrite (dict) .Values.podAnnotations .Values.windowsPodAnnotations) | nindent 8 }}
       {{- end }}
     spec:
+      {{- with .Values.image.pullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       serviceAccountName: {{ include "aws-node-termination-handler.serviceAccountName" . }}
       {{- with .Values.podSecurityContext }}
       securityContext:
@@ -40,15 +44,15 @@ spec:
       {{- with .Values.terminationGracePeriodSeconds }}
       terminationGracePeriodSeconds: {{ . }}
       {{- end }}
-      hostNetwork: {{ .Values.useHostNetwork }}
-      dnsPolicy: {{ default .Values.linuxDnsPolicy .Values.dnsPolicy }}
-      {{- with .Values.dnsConfig }}
+      hostNetwork: false
+      dnsPolicy: {{ default .Values.windowsDnsPolicy .Values.dnsPolicy }}
+      {{-  with .Values.dnsConfig }}
       dnsConfig:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       containers:
         - name: aws-node-termination-handler
-          {{- with .Values.securityContext }}
+          {{- with unset .Values.securityContext "runAsUser" }}
           securityContext:
             {{- toYaml . | nindent 12 }}
           {{- end }}
@@ -77,6 +81,8 @@ spec:
               value: {{ .Values.logLevel | quote }}
             - name: JSON_LOGGING
               value: {{ .Values.jsonLogging | quote }}
+            - name: LOG_FORMAT_VERSION
+              value: {{ .Values.logFormatVersion | quote }}
             - name: ENABLE_PROMETHEUS_SERVER
               value: {{ .Values.enablePrometheusServer | quote }}
             - name: PROMETHEUS_SERVER_PORT
@@ -137,6 +143,8 @@ spec:
             {{- end }}
             - name: ENABLE_SPOT_INTERRUPTION_DRAINING
               value: {{ .Values.enableSpotInterruptionDraining | quote }}
+            - name: ENABLE_ASG_LIFECYCLE_DRAINING
+              value: {{ .Values.enableASGLifecycleDraining | quote }}
             - name: ENABLE_SCHEDULED_EVENT_DRAINING
               value: {{ .Values.enableScheduledEventDraining | quote }}
             - name: ENABLE_REBALANCE_MONITORING
@@ -145,8 +153,6 @@ spec:
               value: {{ .Values.enableRebalanceDraining | quote }}
             - name: ENABLE_SQS_TERMINATION_DRAINING
               value: "false"
-            - name: UPTIME_FROM_FILE
-              value: {{ .Values.procUptimeFile | quote }}
             {{- with .Values.extraEnv }}
               {{- toYaml . | nindent 12 }}
             {{- end }}
@@ -156,11 +162,13 @@ spec:
            - name: liveness-probe
              protocol: TCP
              containerPort: {{ .Values.probes.httpGet.port }}
+             hostPort: {{ .Values.probes.httpGet.port }}
           {{- end }}
           {{- if .Values.enablePrometheusServer }}
            - name: http-metrics
              protocol: TCP
              containerPort: {{ .Values.prometheusServerPort }}
+             hostPort: {{ .Values.prometheusServerPort }}
           {{- end }}
           {{- end }}
           {{- if .Values.enableProbesServer }}
@@ -171,34 +179,28 @@ spec:
           resources:
             {{- toYaml . | nindent 12 }}
           {{- end }}
-          volumeMounts:
-            - name: uptime
-              mountPath: {{ .Values.procUptimeFile }}
-              readOnly: true
           {{- if and .Values.webhookTemplateConfigMapName .Values.webhookTemplateConfigMapKey }}
+          volumeMounts:
             - name: webhook-template
               mountPath: /config/
           {{- end }}
+      {{- if and .Values.webhookTemplateConfigMapName .Values.webhookTemplateConfigMapKey }}
       volumes:
-        - name: uptime
-          hostPath:
-            path: {{ .Values.procUptimeFile | default "/proc/uptime" }}
-        {{- if and .Values.webhookTemplateConfigMapName .Values.webhookTemplateConfigMapKey }}
         - name: webhook-template
           configMap:
             name: {{ .Values.webhookTemplateConfigMapName }}
-        {{- end }}
+      {{- end }}
       nodeSelector:
-        kubernetes.io/os: linux
-      {{- with default .Values.daemonsetNodeSelector (default .Values.nodeSelector .Values.linuxNodeSelector) }}
+        kubernetes.io/os: windows
+      {{- with default .Values.daemonsetNodeSelector (default .Values.nodeSelector .Values.windowsNodeSelector) }}
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- if or .Values.daemonsetAffinity (or .Values.affinity .Values.linuxAffinity) }}
+      {{- if or .Values.daemonsetAffinity (or .Values.affinity .Values.windowsAffinity) }}
       affinity:
-        {{- toYaml (default .Values.daemonsetAffinity (default .Values.affinity .Values.linuxAffinity)) | nindent 8 }}
+        {{- toYaml (default .Values.daemonsetAffinity (default .Values.affinity .Values.windowsAffinity )) | nindent 8 }}
       {{- end }}
-      {{- if or .Values.daemonsetTolerations (or .Values.tolerations .Values.linuxTolerations) }}
+      {{- if or .Values.daemonsetTolerations (or .Values.tolerations .Values.windowsTolerations) }}
       tolerations:
-        {{- toYaml (default .Values.daemonsetTolerations (default .Values.tolerations .Values.linuxTolerations )) | nindent 8 }}
+        {{- toYaml (default .Values.daemonsetTolerations (default .Values.tolerations .Values.windowsTolerations )) | nindent 8 }}
       {{- end }}
 {{- end -}}

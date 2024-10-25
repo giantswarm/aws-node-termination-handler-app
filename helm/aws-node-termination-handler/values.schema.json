@@ -71,6 +71,12 @@
         "checkASGTagBeforeDraining": {
             "type": "boolean"
         },
+        "checkTagBeforeDraining": {
+            "type": "boolean"
+        },
+        "completeLifecycleActionDelaySeconds": {
+            "type": "integer"
+        },
         "cordonOnly": {
             "type": "boolean"
         },
@@ -140,6 +146,9 @@
         "deleteLocalData": {
             "type": "boolean"
         },
+        "deleteSqsMsgIfNodeNotFound": {
+            "type": "boolean"
+        },
         "dnsConfig": {
             "type": "object"
         },
@@ -150,6 +159,9 @@
             "type": "boolean"
         },
         "emitKubernetesEvents": {
+            "type": "boolean"
+        },
+        "enableASGLifecycleDraining": {
             "type": "boolean"
         },
         "enableProbesServer": {
@@ -182,6 +194,19 @@
         "fullnameOverride": {
             "type": "string"
         },
+        "global": {
+            "type": "object",
+            "properties": {
+                "podSecurityStandards": {
+                    "type": "object",
+                    "properties": {
+                        "enforced": {
+                            "type": "boolean"
+                        }
+                    }
+                }
+            }
+        },
         "ignoreDaemonSets": {
             "type": "boolean"
         },
@@ -193,6 +218,9 @@
                 },
                 "pullPolicy": {
                     "type": "string"
+                },
+                "pullSecrets": {
+                    "type": "array"
                 },
                 "registry": {
                     "type": "string"
@@ -229,10 +257,16 @@
         "linuxTolerations": {
             "type": "array"
         },
+        "logFormatVersion": {
+            "type": "integer"
+        },
         "logLevel": {
             "type": "string"
         },
         "managedAsgTag": {
+            "type": "string"
+        },
+        "managedTag": {
             "type": "string"
         },
         "metadataTries": {
@@ -381,6 +415,17 @@
                 "allowPrivilegeEscalation": {
                     "type": "boolean"
                 },
+                "capabilities": {
+                    "type": "object",
+                    "properties": {
+                        "drop": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
                 "readOnlyRootFilesystem": {
                     "type": "boolean"
                 },
@@ -398,18 +443,6 @@
                     "properties": {
                         "type": {
                             "type": "string"
-                        }
-                    }
-                },
-                "capabilities":{
-                    "type": "object",
-                    "properties": {
-                        "drop": {
-                            "type": "array",
-                            "items": {
-                                "type": "string"
-                            },
-                            "default": ["ALL"]
                         }
                     }
                 }
@@ -462,6 +495,9 @@
             "type": "null"
         },
         "tolerations": {
+            "type": "array"
+        },
+        "topologySpreadConstraints": {
             "type": "array"
         },
         "updateStrategy": {
@@ -527,19 +563,6 @@
         },
         "workers": {
             "type": "integer"
-        },
-        "global": {
-            "type": "object",
-            "properties": {
-                "podSecurityStandards": {
-                    "type": "object",
-                    "properties": {
-                        "enforced": {
-                            "type": "boolean"
-                        }
-                    }
-                }
-            }
         }
     }
 }

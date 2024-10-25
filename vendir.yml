@@ -1,0 +1,17 @@
+apiVersion: vendir.k14s.io/v1alpha1
+kind: Config
+directories:
+- path: vendor
+  contents:
+  - path: aws-node-termination-handler
+    git:
+      url: https://github.com/giantswarm/aws-node-termination-handler-upstream
+      ref: main
+    includePaths:
+    - config/helm/aws-node-termination-handler/**/*
+    newRootPath: config/helm/aws-node-termination-handler
+- path: helm/aws-node-termination-handler/templates
+  contents:
+  - path: .
+    directory:
+      path: vendor/aws-node-termination-handler/templates

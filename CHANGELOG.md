@@ -7,6 +7,11 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Changed
+
+- Use vendir to pull from upstream repository https://github.com/giantswarm/aws-node-termination-handler-upstream
+- Upgrade image to 1.22.1
+
 ## [1.19.0] - 2024-03-26
 
 ### Added
