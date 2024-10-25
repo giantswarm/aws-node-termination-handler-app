@@ -1,0 +1,20 @@
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: {{ include "aws-node-termination-handler.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "aws-node-termination-handler.labels" . | nindent 4 }}
+spec:
+  podSelector:
+    matchLabels:
+      {{- include "aws-node-termination-handler.selectorLabelsDeployment" . | nindent 6 }}
+  ingress:
+  - ports:
+    - port: {{ .Values.probes.httpGet.port }}
+      protocol: TCP
+  egress:
+  - {}
+  policyTypes:
+  - Egress
+  - Ingress
