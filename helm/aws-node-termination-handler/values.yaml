@@ -196,7 +196,7 @@ priorityClassName: system-cluster-critical
 awsRegion: ""
 
 # Listens for messages on the specified SQS queue URL
-queueURL: "https://sqs.eu-west-2.amazonaws.com/242036376510/i5jv8-nth"
+queueURL: ""
 
 # The maximum amount of parallel event processors to handle concurrent events
 workers: 10
