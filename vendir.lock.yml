@@ -2,8 +2,8 @@ apiVersion: vendir.k14s.io/v1alpha1
 directories:
 - contents:
   - git:
-      commitTitle: Update helper
-      sha: 2f959b6782ed52f4b342bf500a24801ef8ad9104
+      commitTitle: Deprecated Values
+      sha: 29e827fa5379bb2a254e22566736a9de2837b212
     path: aws-node-termination-handler
   path: vendor
 - contents:
