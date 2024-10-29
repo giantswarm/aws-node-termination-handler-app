@@ -5,14 +5,18 @@ orbs:
 workflows:
   package-and-push-chart-on-tag:
     jobs:
-      - architect/push-to-app-catalog:
-          context: "architect"
-          executor: "app-build-suite"
-          name: "Package and push aws-node-termination-handler chart"
-          app_catalog: "giantswarm-catalog"
-          app_catalog_test: "giantswarm-test-catalog"
-          chart: "aws-node-termination-handler"
-          filters:
+    - architect/push-to-app-catalog:
+        context: architect
+        executor: app-build-suite
+        name: Package and push aws-node-termination-handler chart
+        app_catalog: giantswarm-catalog
+        app_catalog_test: giantswarm-test-catalog
+        chart: aws-node-termination-handler
+        filters:
             # Trigger the job also on git tag.
-            tags:
-              only: /^v.*/
+          tags:
+            only: /^v.*/
+          branches:
+            ignore:
+            - main
+            - master
