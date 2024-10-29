@@ -157,7 +157,7 @@ spec:
               value: {{ .Values.awsSecretAccessKey | quote }}
             {{- end }}
             - name: QUEUE_URL
-              value: {{ .Values.queueURL | quote }}
+              value: {{ .Values.clusterID }}-nth
             - name: DELETE_SQS_MSG_IF_NODE_NOT_FOUND
               value: {{ .Values.deleteSqsMsgIfNodeNotFound | quote }}
             - name: WORKERS
