@@ -2,8 +2,8 @@ apiVersion: vendir.k14s.io/v1alpha1
 directories:
 - contents:
   - git:
-      commitTitle: Update helper
-      sha: 2f959b6782ed52f4b342bf500a24801ef8ad9104
+      commitTitle: set clusterID for the queue URL
+      sha: 0162e0c544c8e8798c9381b00ada8b447dc84d9a
     path: aws-node-termination-handler
   path: vendor
 - contents:

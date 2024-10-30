@@ -123,3 +123,11 @@ The image to use
     {{- print "policy/v1beta1" -}}
   {{- end -}}
 {{- end -}}
+
+{{- define "giantswarm.irsa.annotation" -}}
+{{- if (or (eq .Values.region "cn-north-1") (eq .Values.region "cn-northwest-1"))}}
+eks.amazonaws.com/role-arn: arn:aws-cn:iam::{{ .Values.accountID }}:role/{{ .Values.clusterID }}-nth
+{{- else }}
+eks.amazonaws.com/role-arn: arn:aws:iam::{{ .Values.accountID }}:role/{{ .Values.clusterID }}-nth
+{{- end -}}
+{{- end -}}
