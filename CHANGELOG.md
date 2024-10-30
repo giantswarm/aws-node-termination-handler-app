@@ -7,6 +7,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+## [1.20.0] - 2024-10-30
+
 ### Changed
 
 - Use vendir to pull from upstream repository https://github.com/giantswarm/aws-node-termination-handler-upstream
@@ -76,7 +78,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 - First version.
 
-[Unreleased]: https://github.com/giantswarm/aws-node-termination-handler-app/compare/v1.19.0...HEAD
+[Unreleased]: https://github.com/giantswarm/aws-node-termination-handler-app/compare/v1.20.0...HEAD
+[1.20.0]: https://github.com/giantswarm/aws-node-termination-handler-app/compare/v1.19.0...v1.20.0
 [1.19.0]: https://github.com/giantswarm/aws-node-termination-handler-app/compare/v1.18.0...v1.19.0
 [1.18.0]: https://github.com/giantswarm/aws-node-termination-handler-app/compare/v1.17.2-gs2...v1.18.0
 [1.17.2-gs2]: https://github.com/giantswarm/aws-node-termination-handler-app/compare/v1.17.2-gs1...v1.17.2-gs2
