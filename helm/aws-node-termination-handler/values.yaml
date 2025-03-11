@@ -202,7 +202,8 @@ queueURL: ""
 workers: 10
 
 # If true, check that the instance is tagged with "aws-node-termination-handler/managed" as the key before draining the node
-checkTagBeforeDraining: true
+checkTagBeforeDraining: false
+
 
 # The tag to ensure is on a node if checkTagBeforeDraining is true
 managedTag: "aws-node-termination-handler/managed"
