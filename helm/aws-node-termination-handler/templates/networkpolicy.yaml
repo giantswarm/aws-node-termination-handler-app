@@ -13,6 +13,8 @@ spec:
   - ports:
     - port: {{ .Values.probes.httpGet.port }}
       protocol: TCP
+    - port: {{ .Values.prometheusServerPort }}
+      protocol: TCP
   egress:
   - {}
   policyTypes:

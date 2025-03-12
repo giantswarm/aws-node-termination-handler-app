@@ -2,8 +2,8 @@ apiVersion: vendir.k14s.io/v1alpha1
 directories:
 - contents:
   - git:
-      commitTitle: set clusterID for the queue URL
-      sha: 0162e0c544c8e8798c9381b00ada8b447dc84d9a
+      commitTitle: 'Merge pull request #1 from giantswarm/prom-np...'
+      sha: d5e0fe2aa6f525b763245073b9ca79a10f980301
     path: aws-node-termination-handler
   path: vendor
 - contents:

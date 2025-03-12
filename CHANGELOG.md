@@ -7,6 +7,12 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Changed
+
+- Upgrade image to 1.25.0
+- Upgrade chart from upstream
+- Allow metrics port in network policy
+
 ## [1.20.0] - 2024-10-30
 
 ### Changed

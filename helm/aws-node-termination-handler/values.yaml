@@ -5,7 +5,7 @@
 image:
   registry: gsoci.azurecr.io
   name: giantswarm/aws-node-termination-handler
-  tag: "v1.22.1"
+  tag: "v1.25.0"
   pullPolicy: IfNotPresent
   pullSecrets: []
 
@@ -203,6 +203,7 @@ workers: 10
 
 # If true, check that the instance is tagged with "aws-node-termination-handler/managed" as the key before draining the node
 checkTagBeforeDraining: false
+
 
 # The tag to ensure is on a node if checkTagBeforeDraining is true
 managedTag: "aws-node-termination-handler/managed"
