@@ -2,8 +2,8 @@ apiVersion: vendir.k14s.io/v1alpha1
 directories:
 - contents:
   - git:
-      commitTitle: 'Merge pull request #1 from giantswarm/prom-np...'
-      sha: d5e0fe2aa6f525b763245073b9ca79a10f980301
+      commitTitle: Merge branch 'aws:main' into main
+      sha: 132208e35582638741eed94e74436f470f9981b7
     path: aws-node-termination-handler
   path: vendor
 - contents:
