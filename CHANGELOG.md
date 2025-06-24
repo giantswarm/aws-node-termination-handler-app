@@ -9,7 +9,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ### Changed
 
-- Upgrade image to 1.25.0
+- Upgrade image to 1.25.1
 - Upgrade chart from upstream
 - Allow metrics port in network policy
 
