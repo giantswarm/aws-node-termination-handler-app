@@ -7,6 +7,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+## [1.21.0] - 2025-06-24
+
 ### Changed
 
 - Upgrade image to 1.25.1
@@ -84,7 +86,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 - First version.
 
-[Unreleased]: https://github.com/giantswarm/aws-node-termination-handler-app/compare/v1.20.0...HEAD
+[Unreleased]: https://github.com/giantswarm/aws-node-termination-handler-app/compare/v1.21.0...HEAD
+[1.21.0]: https://github.com/giantswarm/aws-node-termination-handler-app/compare/v1.20.0...v1.21.0
 [1.20.0]: https://github.com/giantswarm/aws-node-termination-handler-app/compare/v1.19.0...v1.20.0
 [1.19.0]: https://github.com/giantswarm/aws-node-termination-handler-app/compare/v1.18.0...v1.19.0
 [1.18.0]: https://github.com/giantswarm/aws-node-termination-handler-app/compare/v1.17.2-gs2...v1.18.0
