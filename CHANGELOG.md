@@ -7,6 +7,11 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Changed
+
+- Enable heartbeats by default (interval 30 seconds, maximum 1 hour)
+- Sync `values.yaml` with upstream
+
 ## [1.21.0] - 2025-06-24
 
 ### Changed
