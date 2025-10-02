@@ -7,6 +7,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+## [1.22.0] - 2025-10-02
+
 ### Changed
 
 - Enable heartbeats by default (interval 30 seconds, maximum 1 hour)
@@ -91,7 +93,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 - First version.
 
-[Unreleased]: https://github.com/giantswarm/aws-node-termination-handler-app/compare/v1.21.0...HEAD
+[Unreleased]: https://github.com/giantswarm/aws-node-termination-handler-app/compare/v1.22.0...HEAD
+[1.22.0]: https://github.com/giantswarm/aws-node-termination-handler-app/compare/v1.21.0...v1.22.0
 [1.21.0]: https://github.com/giantswarm/aws-node-termination-handler-app/compare/v1.20.0...v1.21.0
 [1.20.0]: https://github.com/giantswarm/aws-node-termination-handler-app/compare/v1.19.0...v1.20.0
 [1.19.0]: https://github.com/giantswarm/aws-node-termination-handler-app/compare/v1.18.0...v1.19.0
