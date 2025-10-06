@@ -7,6 +7,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+## [1.23.0] - 2025-10-06
+
 ### Changed
 
 - Upgrade to v1.25.2 to fix a [resource leak bug](https://github.com/aws/aws-node-termination-handler/issues/1172)
@@ -97,7 +99,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 - First version.
 
-[Unreleased]: https://github.com/giantswarm/aws-node-termination-handler-app/compare/v1.22.0...HEAD
+[Unreleased]: https://github.com/giantswarm/aws-node-termination-handler-app/compare/v1.23.0...HEAD
+[1.23.0]: https://github.com/giantswarm/aws-node-termination-handler-app/compare/v1.22.0...v1.23.0
 [1.22.0]: https://github.com/giantswarm/aws-node-termination-handler-app/compare/v1.21.0...v1.22.0
 [1.21.0]: https://github.com/giantswarm/aws-node-termination-handler-app/compare/v1.20.0...v1.21.0
 [1.20.0]: https://github.com/giantswarm/aws-node-termination-handler-app/compare/v1.19.0...v1.20.0
