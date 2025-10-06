@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Changed
+
+- Upgrade to v1.25.2 to fix a [resource leak bug](https://github.com/aws/aws-node-termination-handler/issues/1172)
+
 ## [1.22.0] - 2025-10-02
 
 ### Changed
