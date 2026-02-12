@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Fixed
+
+- Push the chart to the default catalog.
+
 ## [1.23.0] - 2025-10-06
 
 ### Changed
