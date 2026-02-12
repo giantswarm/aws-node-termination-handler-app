@@ -7,6 +7,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+## [1.23.1] - 2026-02-12
+
 ### Fixed
 
 - Push the chart to the default catalog.
@@ -103,7 +105,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 - First version.
 
-[Unreleased]: https://github.com/giantswarm/aws-node-termination-handler-app/compare/v1.23.0...HEAD
+[Unreleased]: https://github.com/giantswarm/aws-node-termination-handler-app/compare/v1.23.1...HEAD
+[1.23.1]: https://github.com/giantswarm/aws-node-termination-handler-app/compare/v1.23.0...v1.23.1
 [1.23.0]: https://github.com/giantswarm/aws-node-termination-handler-app/compare/v1.22.0...v1.23.0
 [1.22.0]: https://github.com/giantswarm/aws-node-termination-handler-app/compare/v1.21.0...v1.22.0
 [1.21.0]: https://github.com/giantswarm/aws-node-termination-handler-app/compare/v1.20.0...v1.21.0
