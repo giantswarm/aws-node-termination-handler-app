@@ -1,4 +1,4 @@
-apiVersion: v1
+apiVersion: v2
 appVersion: 1.25.2
 description: Deploy components for the aws-node-termination-handler app
 name: aws-node-termination-handler
@@ -11,3 +11,8 @@ restrictions:
   compatibleProviders: ["aws"]
 annotations:
   application.giantswarm.io/team: "phoenix"
+dependencies:
+  - name: aws-node-termination-handler
+    alias: upstream
+    version: "0.21.0"
+    repository: "https://aws.github.io/eks-charts"
