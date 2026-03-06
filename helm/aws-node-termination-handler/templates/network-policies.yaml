@@ -1,22 +1,25 @@
+{{- if .Values.networkPolicy.enabled }}
 kind: NetworkPolicy
 apiVersion: networking.k8s.io/v1
 metadata:
-  name: {{ include "aws-node-termination-handler.fullname" . }}
+  name: {{ .Release.Name }}-aws-node-termination-handler
   namespace: {{ .Release.Namespace }}
   labels:
     {{- include "aws-node-termination-handler.labels" . | nindent 4 }}
 spec:
   podSelector:
     matchLabels:
-      {{- include "aws-node-termination-handler.selectorLabelsDeployment" . | nindent 6 }}
+      app.kubernetes.io/name: aws-node-termination-handler
+      app.kubernetes.io/instance: {{ .Release.Name }}
   ingress:
   - ports:
-    - port: {{ .Values.probes.httpGet.port }}
+    - port: 8080
       protocol: TCP
-    - port: {{ .Values.prometheusServerPort }}
+    - port: 9092
       protocol: TCP
   egress:
   - {}
   policyTypes:
   - Egress
   - Ingress
+{{- end }}

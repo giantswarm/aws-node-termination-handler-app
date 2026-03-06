@@ -1,0 +1,6 @@
+appName: "aws-node-termination-handler-bundle"
+repoName: "aws-node-termination-handler-app"
+appCatalog: "default"
+
+providers:
+  - capa
