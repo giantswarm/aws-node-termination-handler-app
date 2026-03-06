@@ -1,5 +1,9 @@
-helmReleaseSourceRef:
-  name: default-test-catalog
+appName: "aws-node-termination-handler-bundle"
+repoName: "aws-node-termination-handler-app"
+appCatalog: "default"
 
 providers:
   - capa
+
+helmReleaseSourceRef:
+  name: default-test-catalog
