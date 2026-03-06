@@ -1,6 +1,6 @@
 appName: "aws-node-termination-handler-bundle"
 repoName: "aws-node-termination-handler-app"
-appCatalog: "giantswarm"
+appCatalog: "default"
 
 providers:
   - capa

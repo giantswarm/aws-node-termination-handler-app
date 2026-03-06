@@ -1,5 +1,5 @@
 helmReleaseSourceRef:
-  name: giantswarm-test-catalog
+  name: default-test-catalog
 
 providers:
   - capa
