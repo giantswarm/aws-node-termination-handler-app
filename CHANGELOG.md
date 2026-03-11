@@ -7,6 +7,11 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Changed
+
+- Add `io.giantswarm.application.audience: giantswarm` annotation.
+- Migrate chart metadata annotations to `io.giantswarm.application.*` format.
+
 ## [1.23.1] - 2026-02-12
 
 ### Fixed
