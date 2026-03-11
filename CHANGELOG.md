@@ -7,6 +7,11 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Changed
+
+- Add `io.giantswarm.application.audience: giantswarm` annotation.
+- Migrate chart metadata annotations to `io.giantswarm.application.*` format.
+
 ## [1.23.1] - 2026-02-12
 
 ### Fixed
@@ -47,77 +52,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 - Add `global.podSecurityStandards.enforced` value for PSS migration.
 
-## [1.18.0] - 2023-07-13
-
-### Fixed
-
-- Add required values for pss policies.
-
-## [1.17.2-gs2] - 2023-07-05
-
-### Added
-
-- Add Service Monitor.
-
-### Changed
-
- - Defined the use of the RuntimeDefault Seccompprofiles in the pod and container security context.
-
-## [1.17.2-gs1] - 2022-09-14
-
-### Changed
-
-- Bump to upstream version 1.17.2 and related chart template.
-
-## [1.16.5-gs1] - 2022-07-01
-
-### Changed
-
-- Bump to upstream version 1.16.5 and related chart template.
-
-## [0.4.0] - 2022-06-15
-
-### Changed
-
-- Remove `imagePullSecrets`
-
-## [0.3.1] - 2022-04-20
-
-### Changed
-
-- Push to `giantswarm` catalog instead of `control-plane` one.
-
-## [0.3.0] - 2022-04-20
-
-### Changed
-
-- Allow customizing the container image registry domain.
-
-## [0.2.0] - 2022-03-21
-
-### Added
-
-- Add VerticalPodAutoscaler CR.
-
-## [0.1.0] - 2022-02-28
-
-### Added
-
-- First version.
-
 [Unreleased]: https://github.com/giantswarm/aws-node-termination-handler-app/compare/v1.23.1...HEAD
 [1.23.1]: https://github.com/giantswarm/aws-node-termination-handler-app/compare/v1.23.0...v1.23.1
 [1.23.0]: https://github.com/giantswarm/aws-node-termination-handler-app/compare/v1.22.0...v1.23.0
 [1.22.0]: https://github.com/giantswarm/aws-node-termination-handler-app/compare/v1.21.0...v1.22.0
 [1.21.0]: https://github.com/giantswarm/aws-node-termination-handler-app/compare/v1.20.0...v1.21.0
 [1.20.0]: https://github.com/giantswarm/aws-node-termination-handler-app/compare/v1.19.0...v1.20.0
-[1.19.0]: https://github.com/giantswarm/aws-node-termination-handler-app/compare/v1.18.0...v1.19.0
-[1.18.0]: https://github.com/giantswarm/aws-node-termination-handler-app/compare/v1.17.2-gs2...v1.18.0
-[1.17.2-gs2]: https://github.com/giantswarm/aws-node-termination-handler-app/compare/v1.17.2-gs1...v1.17.2-gs2
-[1.17.2-gs1]: https://github.com/giantswarm/aws-node-termination-handler-app/compare/v1.16.5-gs1...v1.17.2-gs1
-[1.16.5-gs1]: https://github.com/giantswarm/aws-node-termination-handler-app/compare/v0.4.0...v1.16.5-gs1
-[0.4.0]: https://github.com/giantswarm/aws-node-termination-handler-app/compare/v0.3.1...v0.4.0
-[0.3.1]: https://github.com/giantswarm/aws-node-termination-handler-app/compare/v0.3.0...v0.3.1
-[0.3.0]: https://github.com/giantswarm/aws-node-termination-handler-app/compare/v0.2.0...v0.3.0
-[0.2.0]: https://github.com/giantswarm/aws-node-termination-handler-app/compare/v0.1.0...v0.2.0
-[0.1.0]: https://github.com/giantswarm/aws-node-termination-handler-app/compare/v0.0.0...v0.1.0
+[1.19.0]: https://github.com/giantswarm/aws-node-termination-handler-app/releases/tag/v1.19.0

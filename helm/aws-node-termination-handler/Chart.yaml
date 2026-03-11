@@ -11,3 +11,10 @@ restrictions:
   compatibleProviders: ["aws"]
 annotations:
   application.giantswarm.io/team: "phoenix"
+  io.giantswarm.application.audience: giantswarm
+  io.giantswarm.application.managed: "true"
+  io.giantswarm.application.team: phoenix
+  io.giantswarm.application.upstream-chart-version: "1.25.2"
+  io.giantswarm.application.upstream-chart-url: https://github.com/aws/aws-node-termination-handler
+  io.giantswarm.application.restrictions.cluster-singleton: "true"
+  io.giantswarm.application.restrictions.compatible-providers: "aws"
