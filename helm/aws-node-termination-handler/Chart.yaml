@@ -10,7 +10,6 @@ sources:
 restrictions:
   compatibleProviders: ["aws"]
 annotations:
-  application.giantswarm.io/team: "phoenix"
   io.giantswarm.application.audience: giantswarm
   io.giantswarm.application.managed: "true"
   io.giantswarm.application.team: phoenix
